@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "archvault.attestation.v1",
+  "vaultTitle": "Blueprint Starter .NET 10",
+  "edition": "Starter",
+  "verifiedAtUtc": "2026-11-16T18:19:10Z",
+  "summary": {
+    "status": "PASSED",
+    "totalMarkdownNodes": 37,
+    "totalCanvases": 1,
+    "totalWikilinks": 773,
+    "brokenLinks": 0,
+    "orphanNodes": 0,
+    "fencedBlocksInspected": 40,
+    "typedCodeAndDiagramBlocksVerified": 40,
+    "csharpBlocksCompiledNet10": 18,
+    "shellBlocksVerified": 1,
+    "cliInvocationsVerified": 7,
+    "finopsTablesReconciled": 1,
+    "runtimeChecksAndUnitTestsPassed": 2,
+    "mermaidDiagramsVerified": 9,
+    "packagesVerifiedLive": 14,
+    "errors": 0,
+    "warnings": 0
+  },
+  "languageBreakdown": {
+    "bash": 1,
+    "csharp": 19,
+    "json": 1,
+    "markdown": 7,
+    "mermaid": 9,
+    "xml": 1,
+    "yaml": 2
+  },
+  "toolchainsExecuted": [
+    ".NET 10.0.402 CLR Runtime & OptionsValidator Execution Harness",
+    ".NET SDK 10.0.402 Compiler (Release, -warnaserror, IsAotCompatible=true)",
+    "Agent Skills (SKILL.md) Progressive Disclosure Gate",
+    "Cloud & Agent CLI Grammar Verifier (kubectl / docker / helm / claude)",
+    "Cross-Note Invariant & OTel Metric Consistency Verifier",
+    "Deterministic FinOps & Markdown Table Math Reconciler (Decimal)",
+    "GNU Bash Syntax Parser (bash -n)",
+    "JSON RFC 8259 Strict Parser",
+    "Live CLI Subcommand & Flag Verifier (--help Introspection)",
+    "Live Package Registry & Version Freshness Verifier (NuGet V3 / PyPI / npm / crates.io)",
+    "Mermaid Topology & Label Grammar Verifier",
+    "Obsidian Graph, Canvas & UTF-8 Hygiene Gate",
+    "Principal Substance, Depth & Anti-Stub Gate",
+    "PyYAML Multi-Document Safe Parser & CI Schema Gate",
+    "XML / MSBuild DOM Parser"
+  ],
+  "verifiedPackages": [
+    {
+      "ecosystem": "nuget",
+      "name": "Azure.AI.OpenAI",
+      "requestedVersion": "2.*",
+      "latestStableVersion": "2.1.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "Azure.Identity",
+      "requestedVersion": "1.*",
+      "latestStableVersion": "1.21.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "MassTransit",
+      "requestedVersion": "8.*",
+      "latestStableVersion": "9.2.6",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "Microsoft.Extensions.AI",
+      "requestedVersion": "10.*",
+      "latestStableVersion": "11.0.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "Microsoft.Extensions.AI.OpenAI",
+      "requestedVersion": "10.*",
+      "latestStableVersion": "11.0.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "Microsoft.Extensions.Caching.Hybrid",
+      "requestedVersion": "10.*",
+      "latestStableVersion": "11.0.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "Microsoft.Extensions.Hosting",
+      "requestedVersion": "10.*",
+      "latestStableVersion": "11.0.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "Microsoft.Extensions.Options",
+      "requestedVersion": "10.*",
+      "latestStableVersion": "11.0.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "Microsoft.Extensions.Resilience",
+      "requestedVersion": "10.*",
+      "latestStableVersion": "11.0.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "Microsoft.SemanticKernel",
+      "requestedVersion": "1.*",
+      "latestStableVersion": "1.82.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "OpenTelemetry.Exporter.OpenTelemetryProtocol",
+      "requestedVersion": "1.*",
+      "latestStableVersion": "1.21.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "OpenTelemetry.Extensions.Hosting",
+      "requestedVersion": "1.*",
+      "latestStableVersion": "1.21.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "OpenTelemetry.Instrumentation.AspNetCore",
+      "requestedVersion": "1.*",
+      "latestStableVersion": "1.21.0",
+      "registryStatus": "VERIFIED"
+    },
+    {
+      "ecosystem": "nuget",
+      "name": "OpenTelemetry.Instrumentation.Http",
+      "requestedVersion": "1.*",
+      "latestStableVersion": "1.21.0",
+      "registryStatus": "VERIFIED"
+    }
+  ],
+  "artifactIntegrity": {
+    "verifiedFileCount": 43,
+    "merkleRootSha256": "496d9483e281989e37d0d79946e53cb09a1ab07b1db3d31d1ab05cb712f73e10",
+    "encoding": "UTF-8 (0 BOM)"
+  }
+}

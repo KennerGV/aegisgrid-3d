@@ -1,0 +1,21 @@
+﻿# .NET build outputs
+bin/
+obj/
+out/
+publish/
+*.user
+*.suo
+.vs/
+
+# Frontend / Node
+node_modules/
+dist/
+.vite/
+*.local
+
+# Environment & OS
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

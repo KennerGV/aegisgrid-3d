@@ -1,0 +1,41 @@
+{
+	"nodes":[
+		{"id":"grp-hubs","type":"group","x":-620,"y":-260,"width":440,"height":760,"color":"3","label":"00 — Executive Hubs & Coding-Agent Contracts"},
+		{"id":"grp-arch","type":"group","x":-120,"y":-260,"width":520,"height":760,"color":"5","label":"01 & 02 — .NET 10 Runtime, Agents & Event Fabric"},
+		{"id":"grp-ops","type":"group","x":460,"y":-260,"width":520,"height":760,"color":"1","label":"03 & 04 — Cloud FinOps, OpenTelemetry & KEDA Scale"},
+		{"id":"grp-exec","type":"group","x":1040,"y":-260,"width":500,"height":760,"color":"4","label":"80 / 90 / 99 — Zettelkasten, Copilots & CI Gates"},
+		{"id":"n-moc","type":"file","file":"00 - Home MOC.md","x":-590,"y":-210,"width":380,"height":150,"color":"3"},
+		{"id":"n-claude","type":"file","file":"CLAUDE.md","x":-590,"y":-30,"width":380,"height":150,"color":"3"},
+		{"id":"n-agents","type":"file","file":"AGENTS.md","x":-590,"y":150,"width":380,"height":140,"color":"3"},
+		{"id":"n-roadmap","type":"file","file":"00 - Architecture Roadmap.md","x":-590,"y":320,"width":380,"height":150,"color":"3"},
+		{"id":"n-m1","type":"file","file":"01-Architecture/01 - .NET 10 Distributed Foundations.md","x":-90,"y":-210,"width":460,"height":155,"color":"5"},
+		{"id":"n-m2","type":"file","file":"01-Architecture/02 - Autonomous AI Agent Topologies.md","x":-90,"y":-25,"width":460,"height":155,"color":"5"},
+		{"id":"n-m3","type":"file","file":"02-Implementation/03 - Semantic Kernel Integration.md","x":-90,"y":160,"width":460,"height":155,"color":"5"},
+		{"id":"n-m4","type":"file","file":"02-Implementation/04 - Event-Driven AI Orchestration.md","x":-90,"y":345,"width":460,"height":135,"color":"5"},
+		{"id":"n-m5","type":"file","file":"03-Operations/05 - Cloud FinOps for AI Workloads.md","x":490,"y":-210,"width":460,"height":155,"color":"1"},
+		{"id":"n-m6","type":"file","file":"03-Operations/06 - Observability & Telemetry.md","x":490,"y":-25,"width":460,"height":155,"color":"1"},
+		{"id":"n-m7","type":"file","file":"04-Growth-Scale/07 - Scaling Multi-Agent Systems.md","x":490,"y":160,"width":460,"height":155,"color":"1"},
+		{"id":"n-m8","type":"file","file":"04-Growth-Scale/08 - Future-Proofing the AI Stack.md","x":490,"y":345,"width":460,"height":135,"color":"1"},
+		{"id":"n-c1","type":"file","file":"80-Concepts/Concept 01 - Token Budget Leases.md","x":1070,"y":-210,"width":440,"height":145,"color":"6"},
+		{"id":"n-p1","type":"file","file":"90-Prompts/Prompt 01 - System Architect.md","x":1070,"y":-35,"width":440,"height":145,"color":"4"},
+		{"id":"n-t3","type":"file","file":"99-Templates/Template 03 - Production Release Playbook.md","x":1070,"y":140,"width":440,"height":155,"color":"4"},
+		{"id":"n-s3","type":"file","file":"99-Templates/SOP 03 - Scale & Automation Gate.md","x":1070,"y":325,"width":440,"height":155,"color":"4"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"n-claude","fromSide":"top","toNode":"n-moc","toSide":"bottom","label":"audits"},
+		{"id":"e2","fromNode":"n-agents","fromSide":"top","toNode":"n-claude","toSide":"bottom","label":"pairs with"},
+		{"id":"e3","fromNode":"n-moc","fromSide":"right","toNode":"n-m1","toSide":"left","label":"boots"},
+		{"id":"e4","fromNode":"n-m1","fromSide":"bottom","toNode":"n-m2","toSide":"top"},
+		{"id":"e5","fromNode":"n-m2","fromSide":"bottom","toNode":"n-m3","toSide":"top"},
+		{"id":"e6","fromNode":"n-m3","fromSide":"bottom","toNode":"n-m4","toSide":"top"},
+		{"id":"e7","fromNode":"n-m4","fromSide":"right","toNode":"n-m5","toSide":"left","label":"meters"},
+		{"id":"e8","fromNode":"n-m5","fromSide":"bottom","toNode":"n-m6","toSide":"top"},
+		{"id":"e9","fromNode":"n-m6","fromSide":"bottom","toNode":"n-m7","toSide":"top"},
+		{"id":"e10","fromNode":"n-m7","fromSide":"bottom","toNode":"n-m8","toSide":"top"},
+		{"id":"e11","fromNode":"n-m5","fromSide":"right","toNode":"n-c1","toSide":"left","label":"leases"},
+		{"id":"e12","fromNode":"n-m2","fromSide":"right","toNode":"n-p1","toSide":"left","label":"specifies"},
+		{"id":"e13","fromNode":"n-m7","fromSide":"right","toNode":"n-t3","toSide":"left","label":"deploys"},
+		{"id":"e14","fromNode":"n-t3","fromSide":"bottom","toNode":"n-s3","toSide":"top","label":"CI gate"},
+		{"id":"e15","fromNode":"n-roadmap","fromSide":"right","toNode":"n-m4","toSide":"left"}
+	]
+}
