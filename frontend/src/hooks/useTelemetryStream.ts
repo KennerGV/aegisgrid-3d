@@ -6,8 +6,18 @@ import type {
   TelemetryFrame,
 } from '../types/telemetry';
 
-const RAW_API_URL = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:5000';
+const EXPLICIT_API_URL = import.meta.env.VITE_API_URL as string | undefined;
+const RAW_API_URL = EXPLICIT_API_URL ?? 'http://localhost:5000';
 export const API_BASE_URL = RAW_API_URL.replace(/\/+$/, '');
+
+// On public HTTPS static hosts (e.g. GitHub Pages) without an explicit VITE_API_URL,
+// boot straight into standalone browser simulation with zero mixed-content/loopback probes.
+const IS_STATIC_HTTPS_DEMO =
+  !EXPLICIT_API_URL &&
+  typeof window !== 'undefined' &&
+  window.location.protocol === 'https:' &&
+  window.location.hostname !== 'localhost' &&
+  window.location.hostname !== '127.0.0.1';
 
 const SPARKLINE_HISTORY_LEN = 68;
 
@@ -75,13 +85,14 @@ const POISONED_EVENTS = [
 ];
 
 export function useTelemetryStream() {
+  const initialMode: ConnectionMode = IS_STATIC_HTTPS_DEMO ? 'LOCAL_SIM' : 'CONNECTING';
   const [frame, setFrame] = useState<TelemetryFrame>(INITIAL_FRAME);
-  const [mode, setMode] = useState<ConnectionMode>('CONNECTING');
+  const [mode, setMode] = useState<ConnectionMode>(initialMode);
   const [sparkline, setSparkline] = useState<SparklineSample[]>(createInitialSparkline);
 
   // Zero-re-render mutable ref consumed directly inside Three.js useFrame at 60 FPS
   const telemetryRef = useRef<TelemetryFrame>(INITIAL_FRAME);
-  const modeRef = useRef<ConnectionMode>('CONNECTING');
+  const modeRef = useRef<ConnectionMode>(initialMode);
 
   const localSimRef = useRef<LocalSimState>({
     seq: 1,
@@ -169,11 +180,13 @@ export function useTelemetryStream() {
       }
     };
 
-    connectSse();
+    if (!IS_STATIC_HTTPS_DEMO) {
+      connectSse();
+    }
 
     // Seamless 150ms local standalone physics/resilience engine when backend is offline
     const simTimer = setInterval(() => {
-      if (disposed) return;
+      if (disposed || (typeof document !== 'undefined' && document.hidden)) return;
       const now = Date.now();
 
       // Only emit local simulation ticks if SSE hasn't delivered a frame within 800ms

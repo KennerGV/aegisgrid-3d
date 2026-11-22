@@ -1,10 +1,17 @@
 # AegisGrid 3D — Live `.NET 10` Architecture Digital Twin
 
 <p align="center">
+  <a href="https://github.com/KennerGV/aegisgrid-3d/actions/workflows/deploy.yml">
+    <img src="https://github.com/KennerGV/aegisgrid-3d/actions/workflows/deploy.yml/badge.svg" alt="CI Gates & Deploy Live 3D Demo" />
+  </a>
+</p>
+
+<p align="center">
   <img src="docs/aegisgrid-mockup.jpg" alt="AegisGrid 3D — Live .NET 10 Architecture & Resilience Control Plane" width="100%" />
 </p>
 
 <p align="center">
+  <a href="https://kennergv.github.io/aegisgrid-3d/"><strong>Launch Live 3D WebGL Demo</strong></a> ·
   <a href="https://archvaults.dev"><strong>ArchVault Official</strong></a> ·
   <a href="https://archvaults.dev/visor"><strong>Explore Interactive 3D Graph Visor</strong></a> ·
   <a href="https://whop.com/archvault-dev/"><strong>Download Free $0 Starter Vault on Whop</strong></a>
@@ -12,23 +19,23 @@
 
 ---
 
-**AegisGrid 3D** is the flagship open-source live architecture showcase for **[ArchVault](https://archvaults.dev)**. Instead of static boxes-and-arrows slides, AegisGrid 3D renders a real-time **`.NET 10` Native-AOT-compatible** microservice topology inside a locked-60-FPS **WebGL (`THREE.InstancedMesh`)** isometric digital twin—complete with live chaos injection, deterministic **OPA MCP tool guardrails**, **Polly v8 adaptive circuit breaking**, and **HMAC-verified Dead-Letter Queue (DLQ) replay**.
+**AegisGrid 3D** is the flagship open-source live architecture showcase for **[ArchVault](https://archvaults.dev)**. Instead of static boxes-and-arrows slides, AegisGrid 3D pairs a compiler-gated **`.NET 10` Native-AOT-compatible** microservice resilience engine with a locked-60-FPS **WebGL (`THREE.InstancedMesh`)** isometric digital twin—complete with live chaos injection, deterministic **OPA MCP tool guardrails**, **Polly v8 adaptive circuit breaking**, and **HMAC-verified Dead-Letter Queue (DLQ) replay**.
+
+> [!IMPORTANT]
+> **Interactive Browser Demo vs. Live `.NET 10` Backend Mode**
+> - **Hosted Live Demo ([`kennergv.github.io/aegisgrid-3d`](https://kennergv.github.io/aegisgrid-3d/)):** Runs 100% in **standalone client-side simulation mode (`LOCAL SIMULATOR`)** directly in your browser so every visitor gets a private, isolated 60 FPS sandbox to test chaos scenarios (`SIMULATE MCP ATTACK`, `INJECT FAILURE`, `REPLAY DLQ`) with zero multi-user interference.
+> - **Full `.NET 10` Live Engine (`.NET 10 SSE LIVE`):** To see the real C# 14 / `.NET 10` backend in action—executing Polly v8 adaptive circuit breakers, `OpaPolicyEvaluator`, constant-time `HmacWebhookVerifier`, and bounded `System.Threading.Channels` over real-time `150ms` UTF-8 Server-Sent Events—clone this repository and start both `backend` and `frontend` locally below. Every commit to `main` automatically verifies the `.NET 10` Release & Native-AOT compiler gate via GitHub Actions.
 
 ---
 
-## 1-Command Startup
+## Run Locally (Full `.NET 10` Live Engine + 3D WebGL Twin)
 
-### Option A: Docker Compose (Backend `:5000` + WebGL Frontend `:3000`)
-
-```bash
-docker compose up --build
-```
-
-Open **`http://localhost:3000`** in your browser. The HUD connects automatically to `.NET 10` Server-Sent Events at `http://localhost:5000/api/telemetry/stream` (`150ms` frame cadence).
-
-### Option B: Bare-Metal Local Dev (`.NET 10 SDK` + `Node 22+`)
+### Option A: Bare-Metal Local Dev (`.NET 10 SDK` + `Node 22+`)
 
 ```bash
+git clone https://github.com/KennerGV/aegisgrid-3d.git
+cd aegisgrid-3d
+
 # Terminal 1 — Start the compiler-gated .NET 10 resilience API on :5000
 dotnet run --project backend/AegisGrid.Api/AegisGrid.Api.csproj -c Release
 
@@ -38,7 +45,13 @@ npm install
 npm run dev
 ```
 
-> **Zero-Backend Offline Fallback:** If the `.NET 10` API is unreachable (for example, when deployed as a static site on Vercel, Cloudflare Pages, or GitHub Pages), `useTelemetryStream.ts` automatically engages a deterministic client-side resilience simulator so every 3D chaos control works standalone.
+Open **`http://localhost:3000`**. The top-left HUD badge automatically switches to green **`.NET 10 SSE LIVE`**, streaming real-time `150ms` telemetry frames directly from Kestrel.
+
+### Option B: Docker Compose (1-Command Startup)
+
+```bash
+docker compose up --build
+```
 
 ---
 
@@ -55,7 +68,7 @@ flowchart LR
     DLQ -->|"HMAC-SHA256 + Idempotent Replay"| Polly
 ```
 
-Use the bottom-right glassmorphic HUD controls in the 3D scene (or `curl` directly against `:5000`) to test fault-isolation invariants in real time:
+Use the bottom-right glassmorphic HUD controls in the 3D scene (or `curl` directly against `:5000` when running locally) to test fault-isolation invariants in real time:
 
 1. **`SIMULATE MCP ATTACK` (`POST /api/chaos/mcp-attack`):**
    Fires a 12-second volley of poisoned Model Context Protocol tool calls (`drop_table`, AWS/GCP metadata SSRF `169.254.169.254`, unauthorized egress `exfil-shadow-c2.io`, and missing `mcp:tools:invoke` OAuth 2.1 scopes). Watch crimson attack shards slam into the gold **OPA Policy Gate** and erupt into deflection sparks while `OPA BLOCKED/M` surges.
@@ -85,7 +98,7 @@ cd frontend && npm run build
 - **Zero Reflection Serialization (`AegisGridJsonContext.cs`):** All JSON responses and 150ms UTF-8 SSE frames use compile-time `JsonSerializerContext` source generation (`<IsAotCompatible>true</IsAotCompatible>`, `<EnableTrimAnalyzer>true</EnableTrimAnalyzer>`, `<EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>`).
 - **Zero Unbounded Queues (`DlqRecoveryWorker.cs`):** Enforces `Channel.CreateBounded<DeadLetterEnvelope>(2048)` with `AllowSynchronousContinuations = false`—eliminating heap exhaustion and Kestrel thread-pool hijacking.
 - **Constant-Time Webhook Security (`HmacWebhookVerifier.cs`):** Computes canonical timestamp-bound `HMACSHA256` digests on `stackalloc` buffers and verifies them with `CryptographicOperations.FixedTimeEquals`.
-- **Integrated-GPU 60 FPS Budget (`PacketStreams.tsx`):** Pre-bakes `CatmullRomCurve3` lookup tables into `Float32Array` buffers and drives hundreds of animated spline packets via `THREE.InstancedMesh` matrix updates with selective HDR luminance bloom (`luminanceThreshold = 1.05`).
+- **Integrated-GPU 60 FPS Budget (`PacketStreams.tsx`):** Pre-bakes `CatmullRomCurve3` lookup tables into `Float32Array` buffers and drives hundreds of animated spline packets via `THREE.InstancedMesh` matrix updates with selective HDR luminance bloom (`luminanceThreshold = 1.06`).
 
 ---
 
@@ -103,6 +116,7 @@ Click the **`AEGISGRID 3D — Powered by ARCHVAULT`** crest in the bottom-right 
 
 ## Explore ArchVault
 
+- **Live 3D WebGL Demo:** [https://kennergv.github.io/aegisgrid-3d/](https://kennergv.github.io/aegisgrid-3d/)
 - **Interactive Constellation Graph Visor:** [https://archvaults.dev/visor](https://archvaults.dev/visor)
 - **Download the Free `$0` `.NET 10` Starter Vault & Pro Blueprints:** [https://whop.com/archvault-dev/](https://whop.com/archvault-dev/)
 - **ArchVault Platform:** [https://archvaults.dev](https://archvaults.dev)
